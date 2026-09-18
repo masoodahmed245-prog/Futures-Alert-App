@@ -9,7 +9,11 @@ async function updatePrices() {
 
             const data = await response.json();
 
-            console.log(coin, data.price);
+            const element = document.getElementById(coin);
+
+            if (element) {
+                element.innerText = "$" + Number(data.price).toLocaleString();
+            }
 
         } catch (error) {
             console.log("Error:", coin, error);
