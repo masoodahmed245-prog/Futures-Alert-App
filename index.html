@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Future Alert App</title>
 
     <style>
@@ -14,9 +15,9 @@
         }
 
         .header {
+            background: #111827;
             padding: 20px;
             text-align: center;
-            background: #111827;
         }
 
         .header h1 {
@@ -24,38 +25,70 @@
         }
 
         .status {
-            margin-top: 8px;
             color: #22c55e;
+            margin-top: 8px;
         }
 
         .container {
             padding: 15px;
+            max-width: 700px;
+            margin: auto;
         }
 
-        .card {
+        .box {
+            background: #1e293b;
+            padding: 18px;
+            border-radius: 14px;
+            margin-bottom: 15px;
+        }
+
+        input, select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 7px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #334155;
+            color: white;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #22c55e;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .coin-card {
             background: #1e293b;
             padding: 15px;
-            margin-bottom: 12px;
             border-radius: 12px;
+            margin-bottom: 12px;
         }
 
-        .coin {
+        .coin-name {
             font-size: 20px;
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
-        .price {
-            margin-top: 8px;
-            font-size: 18px;
+        .level {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            border-bottom: 1px solid #334155;
         }
 
-        .signal {
-            margin-top: 8px;
-            font-size: 18px;
-        }
-
-        .wait {
-            color: #facc15;
+        .empty {
+            color: #94a3b8;
         }
     </style>
 </head>
@@ -69,39 +102,138 @@
 
 <div class="container">
 
-    <div class="card">
-        <div class="coin">BTCUSDT</div>
-        <div id="BTCUSDT" class="price">Loading...</div>
-        <div class="signal wait">⏳ WAIT</div>
+    <div class="box">
+        <h2>➕ Add / Edit Coin</h2>
+
+        <label>Coin</label>
+        <select id="coin">
+            <option>BTCUSDT</option>
+            <option>ETHUSDT</option>
+            <option>BNBUSDT</option>
+            <option>SOLUSDT</option>
+            <option>XRPUSDT</option>
+            <option>DOGEUSDT</option>
+            <option>ADAUSDT</option>
+            <option>AVAXUSDT</option>
+            <option>LINKUSDT</option>
+            <option>DOTUSDT</option>
+        </select>
+
+        <label>Higher High (HH)</label>
+        <input id="hh" type="number" step="any" placeholder="Enter HH">
+
+        <label>Higher Low (HL)</label>
+        <input id="hl" type="number" step="any" placeholder="Enter HL">
+
+        <label>Lower High (LH)</label>
+        <input id="lh" type="number" step="any" placeholder="Enter LH">
+
+        <label>Lower Low (LL)</label>
+        <input id="ll" type="number" step="any" placeholder="Enter LL">
+
+        <button onclick="saveCoin()">💾 Save Levels</button>
     </div>
 
-    <div class="card">
-        <div class="coin">ETHUSDT</div>
-        <div id="ETHUSDT" class="price">Loading...</div>
-        <div class="signal wait">⏳ WAIT</div>
-    </div>
+    <h2>📌 My Coins & Levels</h2>
 
-    <div class="card">
-        <div class="coin">BNBUSDT</div>
-        <div id="BNBUSDT" class="price">Loading...</div>
-        <div class="signal wait">⏳ WAIT</div>
-    </div>
-
-    <div class="card">
-        <div class="coin">SOLUSDT</div>
-        <div id="SOLUSDT" class="price">Loading...</div>
-        <div class="signal wait">⏳ WAIT</div>
-    </div>
-
-    <div class="card">
-        <div class="coin">XRPUSDT</div>
-        <div id="XRPUSDT" class="price">Loading...</div>
-        <div class="signal wait">⏳ WAIT</div>
+    <div id="coins">
+        <div class="coin-card">
+            <div class="empty">
+                No levels saved yet.
+            </div>
+        </div>
     </div>
 
 </div>
 
-<script src="app.js"></script>
+<script>
+
+let savedCoins =
+    JSON.parse(localStorage.getItem("futureAlertCoins")) || {};
+
+function saveCoin() {
+
+    const coin = document.getElementById("coin").value;
+
+    const hh = document.getElementById("hh").value;
+    const hl = document.getElementById("hl").value;
+    const lh = document.getElementById("lh").value;
+    const ll = document.getElementById("ll").value;
+
+    savedCoins[coin] = {
+        HH: hh,
+        HL: hl,
+        LH: lh,
+        LL: ll
+    };
+
+    localStorage.setItem(
+        "futureAlertCoins",
+        JSON.stringify(savedCoins)
+    );
+
+    displayCoins();
+
+    alert(coin + " levels saved!");
+}
+
+function displayCoins() {
+
+    const container = document.getElementById("coins");
+
+    container.innerHTML = "";
+
+    const coins = Object.keys(savedCoins);
+
+    if (coins.length === 0) {
+
+        container.innerHTML =
+            '<div class="coin-card">' +
+            '<div class="empty">No levels saved yet.</div>' +
+            '</div>';
+
+        return;
+    }
+
+    coins.forEach(function(coin) {
+
+        const data = savedCoins[coin];
+
+        container.innerHTML += `
+            <div class="coin-card">
+
+                <div class="coin-name">
+                    ${coin}
+                </div>
+
+                <div class="level">
+                    <span>HH</span>
+                    <strong>${data.HH || "-"}</strong>
+                </div>
+
+                <div class="level">
+                    <span>HL</span>
+                    <strong>${data.HL || "-"}</strong>
+                </div>
+
+                <div class="level">
+                    <span>LH</span>
+                    <strong>${data.LH || "-"}</strong>
+                </div>
+
+                <div class="level">
+                    <span>LL</span>
+                    <strong>${data.LL || "-"}</strong>
+                </div>
+
+            </div>
+        `;
+    });
+}
+
+displayCoins();
+
+</script>
 
 </body>
 </html>
