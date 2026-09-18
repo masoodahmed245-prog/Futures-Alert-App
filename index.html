@@ -1,111 +1,192 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futures Alert App</title>
 
-    <title>Future Alert App</title>
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    <style>
-        body {
-            margin: 0;
-            background: #0f172a;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #080b12;
+    color: #ffffff;
+}
 
-        .header {
-            background: #111827;
-            padding: 20px;
-            text-align: center;
-        }
+header {
+    padding: 20px;
+    background: #111722;
+    border-bottom: 1px solid #252c38;
+}
 
-        .header h1 {
-            margin: 0;
-        }
+header h1 {
+    margin: 0;
+    font-size: 23px;
+}
 
-        .status {
-            color: #22c55e;
-            margin-top: 8px;
-        }
+.status {
+    margin-top: 8px;
+    color: #39e58c;
+    font-size: 13px;
+}
 
-        .container {
-            padding: 15px;
-            max-width: 700px;
-            margin: auto;
-        }
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 15px;
+}
 
-        .box {
-            background: #1e293b;
-            padding: 18px;
-            border-radius: 14px;
-            margin-bottom: 15px;
-        }
+.card {
+    background: #111722;
+    border: 1px solid #252c38;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 15px;
+}
 
-        input, select {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 12px;
-            margin-top: 7px;
-            margin-bottom: 12px;
-            border-radius: 8px;
-            border: none;
-            background: #334155;
-            color: white;
-            font-size: 16px;
-        }
+.card h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
 
-        button {
-            width: 100%;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-            background: #22c55e;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+label {
+    display: block;
+    margin-top: 13px;
+    margin-bottom: 6px;
+    color: #b9c0cc;
+    font-size: 13px;
+}
 
-        .coin-card {
-            background: #1e293b;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 12px;
-        }
+select,
+input {
+    width: 100%;
+    padding: 12px;
+    background: #080b12;
+    color: white;
+    border: 1px solid #303847;
+    border-radius: 9px;
+    outline: none;
+}
 
-        .coin-name {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
 
-        .level {
-            display: flex;
-            justify-content: space-between;
-            padding: 7px 0;
-            border-bottom: 1px solid #334155;
-        }
+.level {
+    background: #0b0f17;
+    padding: 14px;
+    border-radius: 10px;
+    margin-top: 12px;
+    border: 1px solid #252c38;
+}
 
-        .empty {
-            color: #94a3b8;
-        }
-    </style>
+.level-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 15px;
+    border: 0;
+    border-radius: 9px;
+    background: #2563eb;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+button:active {
+    transform: scale(.98);
+}
+
+.coin {
+    padding: 14px;
+    margin-top: 10px;
+    background: #0b0f17;
+    border: 1px solid #252c38;
+    border-radius: 10px;
+}
+
+.coin-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.small {
+    color: #929baa;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.switch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.switch-row input {
+    width: auto;
+}
+
+.danger {
+    background: #b91c1c;
+}
+
+.empty {
+    color: #858c99;
+    text-align: center;
+    padding: 15px;
+}
+</style>
 </head>
 
 <body>
 
-<div class="header">
-    <h1>🚀 Future Alert App</h1>
+<header>
+    <h1>🚀 Futures Alert App</h1>
     <div class="status">● SYSTEM ONLINE</div>
-</div>
+</header>
 
 <div class="container">
 
-    <div class="box">
-        <h2>➕ Add / Edit Coin</h2>
+    <!-- DASHBOARD -->
+    <div class="card">
+        <h2>📊 Dashboard</h2>
 
-        <label>Coin</label>
+        <div class="grid">
+            <div>
+                <div class="small">Scanner</div>
+                <strong id="scannerStatus">READY</strong>
+            </div>
+
+            <div>
+                <div class="small">Coins</div>
+                <strong id="coinCount">0</strong>
+            </div>
+        </div>
+
+        <div style="margin-top:15px;">
+            <div class="small">Last Alert</div>
+            <strong id="lastAlert">No alerts yet</strong>
+        </div>
+    </div>
+
+
+    <!-- COIN SETTINGS -->
+    <div class="card">
+        <h2>⚙️ Zone Settings</h2>
+
+        <label>Select Coin</label>
+
         <select id="coin">
             <option>BTCUSDT</option>
             <option>ETHUSDT</option>
@@ -117,113 +198,258 @@
             <option>AVAXUSDT</option>
             <option>LINKUSDT</option>
             <option>DOTUSDT</option>
+            <option>TRXUSDT</option>
+            <option>TONUSDT</option>
+            <option>SUIUSDT</option>
+            <option>APTUSDT</option>
+            <option>ARBUSDT</option>
+            <option>OPUSDT</option>
+            <option>NEARUSDT</option>
+            <option>INJUSDT</option>
+            <option>ATOMUSDT</option>
+            <option>FILUSDT</option>
+            <option>ICPUSDT</option>
+            <option>ETCUSDT</option>
+            <option>LTCUSDT</option>
+            <option>UNIUSDT</option>
+            <option>HBARUSDT</option>
+            <option>PEPEUSDT</option>
+            <option>WIFUSDT</option>
+            <option>SEIUSDT</option>
+            <option>TAOUSDT</option>
+            <option>RUNEUSDT</option>
         </select>
 
-        <label>Higher High (HH)</label>
-        <input id="hh" type="number" step="any" placeholder="Enter HH">
 
-        <label>Higher Low (HL)</label>
-        <input id="hl" type="number" step="any" placeholder="Enter HL">
+        <!-- HH -->
+        <div class="level">
+            <div class="level-title">🔺 Higher High — HH</div>
 
-        <label>Lower High (LH)</label>
-        <input id="lh" type="number" step="any" placeholder="Enter LH">
+            <label>HH Price</label>
+            <input id="hhPrice" type="number" placeholder="Enter HH price">
 
-        <label>Lower Low (LL)</label>
-        <input id="ll" type="number" step="any" placeholder="Enter LL">
+            <div class="grid">
+                <div>
+                    <label>Zone Low</label>
+                    <input id="hhLow" type="number" placeholder="Lower border">
+                </div>
 
-        <button onclick="saveCoin()">💾 Save Levels</button>
-    </div>
-
-    <h2>📌 My Coins & Levels</h2>
-
-    <div id="coins">
-        <div class="coin-card">
-            <div class="empty">
-                No levels saved yet.
+                <div>
+                    <label>Zone High</label>
+                    <input id="hhHigh" type="number" placeholder="Upper border">
+                </div>
             </div>
         </div>
+
+
+        <!-- HL -->
+        <div class="level">
+            <div class="level-title">🟢 Higher Low — HL</div>
+
+            <label>HL Price</label>
+            <input id="hlPrice" type="number" placeholder="Enter HL price">
+
+            <div class="grid">
+                <div>
+                    <label>Zone Low</label>
+                    <input id="hlLow" type="number" placeholder="Lower border">
+                </div>
+
+                <div>
+                    <label>Zone High</label>
+                    <input id="hlHigh" type="number" placeholder="Upper border">
+                </div>
+            </div>
+        </div>
+
+
+        <!-- LH -->
+        <div class="level">
+            <div class="level-title">🟠 Lower High — LH</div>
+
+            <label>LH Price</label>
+            <input id="lhPrice" type="number" placeholder="Enter LH price">
+
+            <div class="grid">
+                <div>
+                    <label>Zone Low</label>
+                    <input id="lhLow" type="number" placeholder="Lower border">
+                </div>
+
+                <div>
+                    <label>Zone High</label>
+                    <input id="lhHigh" type="number" placeholder="Upper border">
+                </div>
+            </div>
+        </div>
+
+
+        <!-- LL -->
+        <div class="level">
+            <div class="level-title">🔻 Lower Low — LL</div>
+
+            <label>LL Price</label>
+            <input id="llPrice" type="number" placeholder="Enter LL price">
+
+            <div class="grid">
+                <div>
+                    <label>Zone Low</label>
+                    <input id="llLow" type="number" placeholder="Lower border">
+                </div>
+
+                <div>
+                    <label>Zone High</label>
+                    <input id="llHigh" type="number" placeholder="Upper border">
+                </div>
+            </div>
+        </div>
+
+        <button onclick="saveZone()">💾 Save Coin & Zones</button>
+
+    </div>
+
+
+    <!-- ALERT SETTINGS -->
+    <div class="card">
+
+        <h2>🔔 Alert Settings</h2>
+
+        <div class="switch-row">
+            <span>🔊 Sound</span>
+            <input id="sound" type="checkbox" checked>
+        </div>
+
+        <div class="switch-row">
+            <span>📳 Vibration</span>
+            <input id="vibration" type="checkbox" checked>
+        </div>
+
+        <div class="switch-row">
+            <span>🔔 Notifications</span>
+            <input id="notifications" type="checkbox" checked>
+        </div>
+
+        <button onclick="testAlert()">🔔 Test Alert</button>
+
+    </div>
+
+
+    <!-- SAVED COINS -->
+    <div class="card">
+
+        <h2>🪙 My Coins</h2>
+
+        <div id="coins">
+            <div class="empty">
+                No coins configured yet.
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ALERT HISTORY -->
+    <div class="card">
+
+        <h2>📜 Alert History</h2>
+
+        <div id="history">
+            <div class="empty">
+                No alerts yet.
+            </div>
+        </div>
+
     </div>
 
 </div>
 
+
 <script>
 
-let savedCoins =
-    JSON.parse(localStorage.getItem("futureAlertCoins")) || {};
+const STORAGE_KEY = "futureAlertCoins";
 
-function saveCoin() {
+function getCoins() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+}
+
+
+function saveZone() {
 
     const coin = document.getElementById("coin").value;
 
-    const hh = document.getElementById("hh").value;
-    const hl = document.getElementById("hl").value;
-    const lh = document.getElementById("lh").value;
-    const ll = document.getElementById("ll").value;
+    const data = {
+        HH: {
+            price: document.getElementById("hhPrice").value,
+            low: document.getElementById("hhLow").value,
+            high: document.getElementById("hhHigh").value
+        },
 
-    savedCoins[coin] = {
-        HH: hh,
-        HL: hl,
-        LH: lh,
-        LL: ll
+        HL: {
+            price: document.getElementById("hlPrice").value,
+            low: document.getElementById("hlLow").value,
+            high: document.getElementById("hlHigh").value
+        },
+
+        LH: {
+            price: document.getElementById("lhPrice").value,
+            low: document.getElementById("lhLow").value,
+            high: document.getElementById("lhHigh").value
+        },
+
+        LL: {
+            price: document.getElementById("llPrice").value,
+            low: document.getElementById("llLow").value,
+            high: document.getElementById("llHigh").value
+        }
     };
 
-    localStorage.setItem(
-        "futureAlertCoins",
-        JSON.stringify(savedCoins)
-    );
+    const coins = getCoins();
+
+    coins[coin] = data;
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(coins));
 
     displayCoins();
 
-    alert(coin + " levels saved!");
+    alert("✅ " + coin + " saved successfully!");
 }
+
 
 function displayCoins() {
 
+    const coins = getCoins();
+
     const container = document.getElementById("coins");
 
-    container.innerHTML = "";
+    const names = Object.keys(coins);
 
-    const coins = Object.keys(savedCoins);
+    document.getElementById("coinCount").textContent = names.length;
 
-    if (coins.length === 0) {
-
+    if (names.length === 0) {
         container.innerHTML =
-            '<div class="coin-card">' +
-            '<div class="empty">No levels saved yet.</div>' +
-            '</div>';
-
+            '<div class="empty">No coins configured yet.</div>';
         return;
     }
 
-    coins.forEach(function(coin) {
+    container.innerHTML = "";
 
-        const data = savedCoins[coin];
+    names.forEach(coin => {
+
+        const c = coins[coin];
 
         container.innerHTML += `
-            <div class="coin-card">
+            <div class="coin">
 
-                <div class="coin-name">
-                    ${coin}
-                </div>
+                <div class="coin-name">${coin}</div>
 
-                <div class="level">
-                    <span>HH</span>
-                    <strong>${data.HH || "-"}</strong>
-                </div>
-
-                <div class="level">
-                    <span>HL</span>
-                    <strong>${data.HL || "-"}</strong>
-                </div>
-
-                <div class="level">
-                    <span>LH</span>
-                    <strong>${data.LH || "-"}</strong>
-                </div>
-
-                <div class="level">
-                    <span>LL</span>
-                    <strong>${data.LL || "-"}</strong>
+                <div class="small">
+                    HH: ${c.HH.price || "-"}
+                    |
+                    HL: ${c.HL.price || "-"}
+                    |
+                    LH: ${c.LH.price || "-"}
+                    |
+                    LL: ${c.LL.price || "-"}
                 </div>
 
             </div>
@@ -231,9 +457,50 @@ function displayCoins() {
     });
 }
 
+
+function testAlert() {
+
+    if (
+        document.getElementById("notifications").checked &&
+        Notification.permission !== "granted"
+    ) {
+        Notification.requestPermission();
+    }
+
+    if (document.getElementById("sound").checked) {
+
+        const audio =
+            new Audio(
+                "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA="
+            );
+
+        audio.play().catch(() => {});
+    }
+
+    if (
+        document.getElementById("vibration").checked &&
+        navigator.vibrate
+    ) {
+        navigator.vibrate([500, 300, 500]);
+    }
+
+    if (
+        document.getElementById("notifications").checked &&
+        Notification.permission === "granted"
+    ) {
+        new Notification("🚨 Futures Alert App", {
+            body: "Test alert successful!"
+        });
+    }
+
+    document.getElementById("lastAlert").textContent =
+        "Test alert sent";
+}
+
+
 displayCoins();
 
 </script>
 
 </body>
-</html>
+                </html>
