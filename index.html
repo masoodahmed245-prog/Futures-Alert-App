@@ -137,10 +137,6 @@ button:active {
     width: auto;
 }
 
-.danger {
-    background: #b91c1c;
-}
-
 .empty {
     color: #858c99;
     text-align: center;
@@ -180,9 +176,9 @@ button:active {
         </div>
     </div>
 
-
-    <!-- COIN SETTINGS -->
+    <!-- ZONE SETTINGS -->
     <div class="card">
+
         <h2>⚙️ Zone Settings</h2>
 
         <label>Select Coin</label>
@@ -220,7 +216,6 @@ button:active {
             <option>RUNEUSDT</option>
         </select>
 
-
         <!-- HH -->
         <div class="level">
             <div class="level-title">🔺 Higher High — HH</div>
@@ -240,7 +235,6 @@ button:active {
                 </div>
             </div>
         </div>
-
 
         <!-- HL -->
         <div class="level">
@@ -262,7 +256,6 @@ button:active {
             </div>
         </div>
 
-
         <!-- LH -->
         <div class="level">
             <div class="level-title">🟠 Lower High — LH</div>
@@ -282,7 +275,6 @@ button:active {
                 </div>
             </div>
         </div>
-
 
         <!-- LL -->
         <div class="level">
@@ -308,7 +300,6 @@ button:active {
 
     </div>
 
-
     <!-- ALERT SETTINGS -->
     <div class="card">
 
@@ -333,7 +324,6 @@ button:active {
 
     </div>
 
-
     <!-- SAVED COINS -->
     <div class="card">
 
@@ -341,12 +331,11 @@ button:active {
 
         <div id="coins">
             <div class="empty">
-                No coins configured yet.
+                Loading...
             </div>
         </div>
 
     </div>
-
 
     <!-- ALERT HISTORY -->
     <div class="card">
@@ -363,142 +352,527 @@ button:active {
 
 </div>
 
-
 <script>
+
+/* ================================
+   SUPABASE CONNECTION
+================================ */
+
+const SUPABASE_URL =
+    "https://yuvgbynicpxnyxmnqzpk.supabase.co";
+
+const SUPABASE_KEY =
+    "PASTE_YOUR_PUBLISHABLE_KEY_HERE";
+
+
+/* ================================
+   LOCAL STORAGE BACKUP
+================================ */
 
 const STORAGE_KEY = "futureAlertCoins";
 
+
 function getCoins() {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+
+    return JSON.parse(
+        localStorage.getItem(STORAGE_KEY) || "{}"
+    );
+
 }
 
 
-function saveZone() {
+/* ================================
+   SAVE TO LOCAL STORAGE
+================================ */
 
-    const coin = document.getElementById("coin").value;
-
-    const data = {
-        HH: {
-            price: document.getElementById("hhPrice").value,
-            low: document.getElementById("hhLow").value,
-            high: document.getElementById("hhHigh").value
-        },
-
-        HL: {
-            price: document.getElementById("hlPrice").value,
-            low: document.getElementById("hlLow").value,
-            high: document.getElementById("hlHigh").value
-        },
-
-        LH: {
-            price: document.getElementById("lhPrice").value,
-            low: document.getElementById("lhLow").value,
-            high: document.getElementById("lhHigh").value
-        },
-
-        LL: {
-            price: document.getElementById("llPrice").value,
-            low: document.getElementById("llLow").value,
-            high: document.getElementById("llHigh").value
-        }
-    };
+function saveLocal(coin, data) {
 
     const coins = getCoins();
 
     coins[coin] = data;
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(coins));
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(coins)
+    );
 
-    displayCoins();
-
-    alert("✅ " + coin + " saved successfully!");
 }
 
+
+/* ================================
+   SAVE TO SUPABASE
+================================ */
+
+async function saveToSupabase(coin, data) {
+
+    const row = {
+
+        coin: coin,
+
+        hh_price: data.HH.price || null,
+        hh_low: data.HH.low || null,
+        hh_high: data.HH.high || null,
+
+        hl_price: data.HL.price || null,
+        hl_low: data.HL.low || null,
+        hl_high: data.HL.high || null,
+
+        lh_price: data.LH.price || null,
+        lh_low: data.LH.low || null,
+        lh_high: data.LH.high || null,
+
+        ll_price: data.LL.price || null,
+        ll_low: data.LL.low || null,
+        ll_high: data.LL.high || null,
+
+        enabled: true
+    };
+
+
+    const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/coin_zones?on_conflict=coin`,
+        {
+            method: "POST",
+
+            headers: {
+
+                "apikey": SUPABASE_KEY,
+
+                "Authorization":
+                    `Bearer ${SUPABASE_KEY}`,
+
+                "Content-Type":
+                    "application/json",
+
+                "Prefer":
+                    "resolution=merge-duplicates,return=representation"
+            },
+
+            body: JSON.stringify(row)
+        }
+    );
+
+
+    if (!response.ok) {
+
+        const errorText =
+            await response.text();
+
+        throw new Error(
+            "Supabase: " + errorText
+        );
+
+    }
+
+
+    return await response.json();
+
+}
+
+
+/* ================================
+   LOAD FROM SUPABASE
+================================ */
+
+async function loadFromSupabase() {
+
+    try {
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/coin_zones?select=*`,
+            {
+
+                method: "GET",
+
+                headers: {
+
+                    "apikey": SUPABASE_KEY,
+
+                    "Authorization":
+                        `Bearer ${SUPABASE_KEY}`
+                }
+
+            }
+        );
+
+
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                "Supabase: " + errorText
+            );
+
+        }
+
+
+        const rows =
+            await response.json();
+
+
+        const coins = {};
+
+
+        rows.forEach(row => {
+
+            coins[row.coin] = {
+
+                HH: {
+                    price: row.hh_price ?? "",
+                    low: row.hh_low ?? "",
+                    high: row.hh_high ?? ""
+                },
+
+                HL: {
+                    price: row.hl_price ?? "",
+                    low: row.hl_low ?? "",
+                    high: row.hl_high ?? ""
+                },
+
+                LH: {
+                    price: row.lh_price ?? "",
+                    low: row.lh_low ?? "",
+                    high: row.lh_high ?? ""
+                },
+
+                LL: {
+                    price: row.ll_price ?? "",
+                    low: row.ll_low ?? "",
+                    high: row.ll_high ?? ""
+                }
+
+            };
+
+        });
+
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(coins)
+        );
+
+
+        displayCoins();
+
+
+        console.log(
+            "Supabase data loaded:",
+            rows
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Supabase load error:",
+            error
+        );
+
+        displayCoins();
+
+    }
+
+}
+
+
+/* ================================
+   SAVE COIN + ZONES
+================================ */
+
+async function saveZone() {
+
+    const coin =
+        document.getElementById("coin").value;
+
+
+    const data = {
+
+        HH: {
+
+            price:
+                document.getElementById("hhPrice").value,
+
+            low:
+                document.getElementById("hhLow").value,
+
+            high:
+                document.getElementById("hhHigh").value
+        },
+
+
+        HL: {
+
+            price:
+                document.getElementById("hlPrice").value,
+
+            low:
+                document.getElementById("hlLow").value,
+
+            high:
+                document.getElementById("hlHigh").value
+        },
+
+
+        LH: {
+
+            price:
+                document.getElementById("lhPrice").value,
+
+            low:
+                document.getElementById("lhLow").value,
+
+            high:
+                document.getElementById("lhHigh").value
+        },
+
+
+        LL: {
+
+            price:
+                document.getElementById("llPrice").value,
+
+            low:
+                document.getElementById("llLow").value,
+
+            high:
+                document.getElementById("llHigh").value
+        }
+
+    };
+
+
+    try {
+
+        document.getElementById(
+            "scannerStatus"
+        ).textContent = "SAVING...";
+
+
+        /* Save local backup */
+
+        saveLocal(
+            coin,
+            data
+        );
+
+
+        /* Save cloud */
+
+        await saveToSupabase(
+            coin,
+            data
+        );
+
+
+        displayCoins();
+
+
+        document.getElementById(
+            "scannerStatus"
+        ).textContent = "READY";
+
+
+        document.getElementById(
+            "lastAlert"
+        ).textContent =
+            coin + " zones saved";
+
+
+        alert(
+            "✅ " +
+            coin +
+            " saved to Supabase!"
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        document.getElementById(
+            "scannerStatus"
+        ).textContent = "ERROR";
+
+
+        alert(
+            "❌ Supabase save failed.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ================================
+   DISPLAY SAVED COINS
+================================ */
 
 function displayCoins() {
 
-    const coins = getCoins();
+    const coins =
+        getCoins();
 
-    const container = document.getElementById("coins");
 
-    const names = Object.keys(coins);
+    const container =
+        document.getElementById("coins");
 
-    document.getElementById("coinCount").textContent = names.length;
+
+    const names =
+        Object.keys(coins);
+
+
+    document.getElementById(
+        "coinCount"
+    ).textContent =
+        names.length;
+
 
     if (names.length === 0) {
+
         container.innerHTML =
-            '<div class="empty">No coins configured yet.</div>';
+            '<div class="empty">' +
+            'No coins configured yet.' +
+            '</div>';
+
         return;
+
     }
+
 
     container.innerHTML = "";
 
+
     names.forEach(coin => {
 
-        const c = coins[coin];
+        const c =
+            coins[coin];
+
 
         container.innerHTML += `
+
             <div class="coin">
 
-                <div class="coin-name">${coin}</div>
+                <div class="coin-name">
+                    ${coin}
+                </div>
 
                 <div class="small">
+
                     HH: ${c.HH.price || "-"}
+
                     |
+
                     HL: ${c.HL.price || "-"}
+
                     |
+
                     LH: ${c.LH.price || "-"}
+
                     |
+
                     LL: ${c.LL.price || "-"}
+
                 </div>
 
             </div>
+
         `;
+
     });
+
 }
 
+
+/* ================================
+   TEST ALERT
+================================ */
 
 function testAlert() {
 
     if (
-        document.getElementById("notifications").checked &&
+        document.getElementById(
+            "notifications"
+        ).checked &&
         Notification.permission !== "granted"
     ) {
+
         Notification.requestPermission();
+
     }
 
-    if (document.getElementById("sound").checked) {
+
+    if (
+        document.getElementById(
+            "sound"
+        ).checked
+    ) {
 
         const audio =
             new Audio(
                 "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA="
             );
 
-        audio.play().catch(() => {});
+
+        audio.play().catch(
+            () => {}
+        );
+
     }
 
+
     if (
-        document.getElementById("vibration").checked &&
+        document.getElementById(
+            "vibration"
+        ).checked &&
         navigator.vibrate
     ) {
-        navigator.vibrate([500, 300, 500]);
+
+        navigator.vibrate(
+            [500, 300, 500]
+        );
+
     }
+
 
     if (
-        document.getElementById("notifications").checked &&
+        document.getElementById(
+            "notifications"
+        ).checked &&
         Notification.permission === "granted"
     ) {
-        new Notification("🚨 Futures Alert App", {
-            body: "Test alert successful!"
-        });
+
+        new Notification(
+            "🚨 Futures Alert App",
+            {
+                body:
+                    "Test alert successful!"
+            }
+        );
+
     }
 
-    document.getElementById("lastAlert").textContent =
+
+    document.getElementById(
+        "lastAlert"
+    ).textContent =
         "Test alert sent";
+
 }
 
 
+/* ================================
+   START APP
+================================ */
+
 displayCoins();
+
+loadFromSupabase();
 
 </script>
 
