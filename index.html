@@ -21,7 +21,7 @@ body{
     padding:18px;
 }
 
-.header{
+.header,.card{
     background:#0d1b2d;
     border:1px solid #1d3550;
     border-radius:14px;
@@ -29,27 +29,12 @@ body{
     margin-bottom:15px;
 }
 
-h1{
-    margin:0 0 8px;
-    font-size:25px;
-}
+h1{margin:0 0 8px;font-size:25px}
+h2{margin-top:0;font-size:20px}
 
 .status{
     color:#35e58c;
     font-weight:bold;
-}
-
-.card{
-    background:#0d1b2d;
-    border:1px solid #1d3550;
-    border-radius:14px;
-    padding:18px;
-    margin-bottom:15px;
-}
-
-h2{
-    margin-top:0;
-    font-size:20px;
 }
 
 .dashboard{
@@ -71,9 +56,7 @@ h2{
     margin-bottom:6px;
 }
 
-.stat strong{
-    font-size:18px;
-}
+.stat strong{font-size:18px}
 
 select,input,button{
     width:100%;
@@ -93,17 +76,8 @@ button{
     cursor:pointer;
 }
 
-button:hover{
-    opacity:.9;
-}
-
-button.danger{
-    background:#8f2430;
-}
-
-button.test{
-    background:#6b4bb3;
-}
+button.danger{background:#8f2430}
+button.test{background:#6b4bb3}
 
 .grid{
     display:grid;
@@ -118,10 +92,7 @@ button.test{
     margin-bottom:12px;
 }
 
-.zone h3{
-    margin-top:0;
-}
-
+.zone h3{margin-top:0}
 .hh h3{color:#ff6464}
 .hl h3{color:#4ee58c}
 .lh h3{color:#ffad42}
@@ -170,9 +141,7 @@ button.test{
     font-size:17px;
 }
 
-.coin-price{
-    color:#35e58c;
-}
+.coin-price{color:#35e58c}
 
 .alert-item{
     border-left:4px solid #35e58c;
@@ -219,8 +188,7 @@ button.test{
 }
 
 @media(max-width:700px){
-    .dashboard,
-    .grid{
+    .dashboard,.grid{
         grid-template-columns:1fr;
     }
 }
@@ -263,153 +231,153 @@ button.test{
 
 <div class="card">
 
-    <h2>⚙️ Zone Settings</h2>
+<h2>⚙️ Zone Settings</h2>
 
-    <label>Select Coin</label>
-    <select id="coinSelect"></select>
+<label>Select Coin</label>
+<select id="coinSelect"></select>
 
-    <div id="currentPriceBox" class="price-box">
-        <div>Current Binance Futures Price</div>
-        <div id="currentPrice" class="live-price">Loading...</div>
-        <div id="zoneStatus" class="zone-status normal">
-            Waiting for price...
-        </div>
+<div class="price-box">
+    <div>Current Binance Futures Price</div>
+    <div id="currentPrice" class="live-price">Loading...</div>
+    <div id="zoneStatus" class="zone-status normal">
+        Waiting for price...
     </div>
+</div>
 
-    <div class="zone hh">
-        <h3>🔺 Higher High — HH</h3>
+<div class="zone hh">
+<h3>🔺 Higher High — HH</h3>
 
-        <label>HH Price</label>
-        <input id="hh_price" type="number" step="any">
+<label>HH Price</label>
+<input id="hh_price" type="number" step="any">
 
-        <div class="grid">
-            <div>
-                <label>Zone Low</label>
-                <input id="hh_low" type="number" step="any">
-            </div>
+<div class="grid">
+<div>
+<label>Zone Low</label>
+<input id="hh_low" type="number" step="any">
+</div>
 
-            <div>
-                <label>Zone High</label>
-                <input id="hh_high" type="number" step="any">
-            </div>
+<div>
+<label>Zone High</label>
+<input id="hh_high" type="number" step="any">
+</div>
 
-            <div></div>
-        </div>
-    </div>
+<div></div>
+</div>
+</div>
 
-    <div class="zone hl">
-        <h3>🟢 Higher Low — HL</h3>
+<div class="zone hl">
+<h3>🟢 Higher Low — HL</h3>
 
-        <label>HL Price</label>
-        <input id="hl_price" type="number" step="any">
+<label>HL Price</label>
+<input id="hl_price" type="number" step="any">
 
-        <div class="grid">
-            <div>
-                <label>Zone Low</label>
-                <input id="hl_low" type="number" step="any">
-            </div>
+<div class="grid">
+<div>
+<label>Zone Low</label>
+<input id="hl_low" type="number" step="any">
+</div>
 
-            <div>
-                <label>Zone High</label>
-                <input id="hl_high" type="number" step="any">
-            </div>
+<div>
+<label>Zone High</label>
+<input id="hl_high" type="number" step="any">
+</div>
 
-            <div></div>
-        </div>
-    </div>
+<div></div>
+</div>
+</div>
 
-    <div class="zone lh">
-        <h3>🟠 Lower High — LH</h3>
+<div class="zone lh">
+<h3>🟠 Lower High — LH</h3>
 
-        <label>LH Price</label>
-        <input id="lh_price" type="number" step="any">
+<label>LH Price</label>
+<input id="lh_price" type="number" step="any">
 
-        <div class="grid">
-            <div>
-                <label>Zone Low</label>
-                <input id="lh_low" type="number" step="any">
-            </div>
+<div class="grid">
+<div>
+<label>Zone Low</label>
+<input id="lh_low" type="number" step="any">
+</div>
 
-            <div>
-                <label>Zone High</label>
-                <input id="lh_high" type="number" step="any">
-            </div>
+<div>
+<label>Zone High</label>
+<input id="lh_high" type="number" step="any">
+</div>
 
-            <div></div>
-        </div>
-    </div>
+<div></div>
+</div>
+</div>
 
-    <div class="zone ll">
-        <h3>🔻 Lower Low — LL</h3>
+<div class="zone ll">
+<h3>🔻 Lower Low — LL</h3>
 
-        <label>LL Price</label>
-        <input id="ll_price" type="number" step="any">
+<label>LL Price</label>
+<input id="ll_price" type="number" step="any">
 
-        <div class="grid">
-            <div>
-                <label>Zone Low</label>
-                <input id="ll_low" type="number" step="any">
-            </div>
+<div class="grid">
+<div>
+<label>Zone Low</label>
+<input id="ll_low" type="number" step="any">
+</div>
 
-            <div>
-                <label>Zone High</label>
-                <input id="ll_high" type="number" step="any">
-            </div>
+<div>
+<label>Zone High</label>
+<input id="ll_high" type="number" step="any">
+</div>
 
-            <div></div>
-        </div>
-    </div>
+<div></div>
+</div>
+</div>
 
-    <div class="grid">
-        <button onclick="saveCoin()">💾 Save Coin & Zones</button>
-        <button class="danger" onclick="clearForm()">🗑️ Clear Form</button>
-        <button class="test" onclick="testAlert()">🔔 Test Alert</button>
-    </div>
+<div class="grid">
+<button onclick="saveCoin()">💾 Save Coin & Zones</button>
+<button class="danger" onclick="clearForm()">🗑️ Clear Form</button>
+<button class="test" onclick="testAlert()">🔔 Test Alert</button>
+</div>
 
 </div>
 
 <div class="card">
 
-    <h2>🔔 Alert Settings</h2>
+<h2>🔔 Alert Settings</h2>
 
-    <div class="checkbox-row">
+<div class="checkbox-row">
 
-        <label>
-            <input type="checkbox" id="soundEnabled" checked>
-            🔊 Sound
-        </label>
+<label>
+<input type="checkbox" id="soundEnabled" checked>
+🔊 Sound
+</label>
 
-        <label>
-            <input type="checkbox" id="vibrationEnabled" checked>
-            📳 Vibration
-        </label>
+<label>
+<input type="checkbox" id="vibrationEnabled" checked>
+📳 Vibration
+</label>
 
-        <label>
-            <input type="checkbox" id="notificationEnabled" checked>
-            🔔 Notifications
-        </label>
+<label>
+<input type="checkbox" id="notificationEnabled" checked>
+🔔 Notifications
+</label>
 
-    </div>
+</div>
 
 </div>
 
 <div class="card">
 
-    <h2>🪙 My Coins</h2>
+<h2>🪙 My Coins</h2>
 
-    <div id="myCoins">
-        No saved coins yet.
-    </div>
+<div id="myCoins">
+No saved coins yet.
+</div>
 
 </div>
 
 <div class="card">
 
-    <h2>📜 Alert History</h2>
+<h2>📜 Alert History</h2>
 
-    <div id="alertHistory">
-        No alerts yet.
-    </div>
+<div id="alertHistory">
+No alerts yet.
+</div>
 
 </div>
 
@@ -418,7 +386,7 @@ button.test{
 <script>
 
 /* =========================================================
-   SUPABASE
+   CONFIG
 ========================================================= */
 
 const SUPABASE_URL =
@@ -427,12 +395,9 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_Hi3MyKLv2_hLzSN_Cvj4rw_aSjywuW9";
 
-/* =========================================================
-   BINANCE FUTURES
-========================================================= */
-
 const BINANCE_URL =
 "https://fapi.binance.com/fapi/v1/ticker/price";
+
 
 /* =========================================================
    COINS
@@ -471,265 +436,497 @@ const COINS = [
 "RUNEUSDT"
 ];
 
+
 /* =========================================================
-   APP STATE
+   STATE
 ========================================================= */
 
 let savedCoins = [];
 let prices = {};
 let alertedZones = {};
 let alertHistory = [];
-let lastAlertText = "None";
+let audioContext = null;
+
 
 /* =========================================================
-   SUPABASE REQUEST
-========================================================= */
-
-async function supabaseRequest(endpoint, options = {}) {
-
-    const response = await fetch(
-        SUPABASE_URL + "/rest/v1/" + endpoint,
-        {
-            ...options,
-            headers: {
-                "apikey": SUPABASE_KEY,
-                "Authorization": "Bearer " + SUPABASE_KEY,
-                "Content-Type": "application/json",
-                "Prefer": options.method === "POST"
-                    ? "return=representation"
-                    : "return=minimal",
-                ...(options.headers || {})
-            }
-        }
-    );
-
-    const text = await response.text();
-
-    if (!response.ok) {
-        throw new Error(text || ("HTTP " + response.status));
-    }
-
-    if (!text) return null;
-
-    try {
-        return JSON.parse(text);
-    } catch {
-        return text;
-    }
-}
-
-/* =========================================================
-   INIT
+   START APP
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    populateCoins();
+    try {
 
-    await requestNotificationPermission();
+        populateCoins();
 
-    await testSupabaseConnection();
+        await testSupabaseConnection();
 
-    await loadCoins();
+        await loadCoins();
 
-    startScanner();
+        startScanner();
+
+    } catch(error) {
+
+        console.error("STARTUP ERROR:", error);
+
+        document.getElementById("scannerStatus").textContent =
+            "ERROR";
+
+        showConnectionError(
+            "Startup error: " + error.message
+        );
+    }
+
 });
 
+
 /* =========================================================
-   COIN SELECT
+   COIN DROPDOWN
 ========================================================= */
 
-function populateCoins() {
+function populateCoins(){
 
-    const select = document.getElementById("coinSelect");
+    const select =
+        document.getElementById("coinSelect");
 
     select.innerHTML = "";
 
     COINS.forEach(coin => {
 
-        const option = document.createElement("option");
+        const option =
+            document.createElement("option");
 
         option.value = coin;
         option.textContent = coin;
 
         select.appendChild(option);
+
     });
 
-    select.addEventListener("change", loadSelectedCoin);
+    select.addEventListener(
+        "change",
+        loadSelectedCoin
+    );
 }
 
+
 /* =========================================================
-   SUPABASE TEST
+   SUPABASE REQUEST
 ========================================================= */
 
-async function testSupabaseConnection() {
+async function supabaseRequest(
+    endpoint,
+    options = {}
+){
+
+    const response =
+        await fetch(
+            SUPABASE_URL +
+            "/rest/v1/" +
+            endpoint,
+            {
+                ...options,
+
+                headers:{
+                    "apikey":SUPABASE_KEY,
+
+                    "Authorization":
+                        "Bearer " + SUPABASE_KEY,
+
+                    "Content-Type":
+                        "application/json",
+
+                    "Prefer":
+                        options.method === "POST"
+                        ? "return=representation"
+                        : "return=minimal",
+
+                    ...(options.headers || {})
+                }
+            }
+        );
+
+    const text =
+        await response.text();
+
+    if(!response.ok){
+
+        throw new Error(
+            text ||
+            ("HTTP " + response.status)
+        );
+
+    }
+
+    if(!text) return null;
+
+    try{
+        return JSON.parse(text);
+    }
+    catch{
+        return text;
+    }
+}
+
+
+/* =========================================================
+   SUPABASE CONNECTION TEST
+========================================================= */
+
+async function testSupabaseConnection(){
 
     const box =
-        document.getElementById("connectionMessage");
+        document.getElementById(
+            "connectionMessage"
+        );
 
-    try {
+    try{
 
         await supabaseRequest(
             "coin_zones?select=id&limit=1"
         );
 
-        box.className = "message success";
+        box.className =
+            "message success";
 
         box.textContent =
             "Supabase connected successfully.";
 
-    } catch (error) {
+    }
+    catch(error){
 
-        box.className = "message fail";
+        box.className =
+            "message fail";
 
         box.textContent =
-            "Supabase error: " + error.message;
+            "Supabase error: " +
+            error.message;
 
-        console.error(error);
+        console.error(
+            "SUPABASE ERROR:",
+            error
+        );
+
+        throw error;
     }
 }
 
+
 /* =========================================================
-   LOAD COINS
+   ERROR MESSAGE
 ========================================================= */
 
-async function loadCoins() {
+function showConnectionError(message){
 
-    try {
-
-        const data = await supabaseRequest(
-            "coin_zones?select=*"
+    const box =
+        document.getElementById(
+            "connectionMessage"
         );
 
-        savedCoins = Array.isArray(data) ? data : [];
+    box.className =
+        "message fail";
 
-        document.getElementById("coinCount").textContent =
+    box.textContent =
+        message;
+}
+
+
+/* =========================================================
+   LOAD SAVED COINS
+========================================================= */
+
+async function loadCoins(){
+
+    try{
+
+        const data =
+            await supabaseRequest(
+                "coin_zones?select=*"
+            );
+
+        savedCoins =
+            Array.isArray(data)
+            ? data
+            : [];
+
+        document.getElementById(
+            "coinCount"
+        ).textContent =
             savedCoins.length;
 
         renderMyCoins();
 
         await loadSelectedCoin();
 
-    } catch (error) {
+    }
+    catch(error){
 
-        console.error("Load coins error:", error);
+        console.error(
+            "LOAD COINS ERROR:",
+            error
+        );
+
+        throw error;
     }
 }
+
 
 /* =========================================================
    LOAD SELECTED COIN
 ========================================================= */
 
-async function loadSelectedCoin() {
+async function loadSelectedCoin(){
 
     const coin =
-        document.getElementById("coinSelect").value;
+        document.getElementById(
+            "coinSelect"
+        ).value;
 
     clearZoneInputs();
 
-    const row = savedCoins.find(
-        item => item.coin === coin
+    const row =
+        savedCoins.find(
+            item => item.coin === coin
+        );
+
+    if(!row){
+
+        updateZoneStatus();
+        return;
+    }
+
+    setValue(
+        "hh_price",
+        row.hh_price
     );
 
-    if (!row) return;
+    setValue(
+        "hh_low",
+        row.hh_low
+    );
 
-    setValue("hh_price", row.hh_price);
-    setValue("hh_low", row.hh_low);
-    setValue("hh_high", row.hh_high);
+    setValue(
+        "hh_high",
+        row.hh_high
+    );
 
-    setValue("hl_price", row.hl_price);
-    setValue("hl_low", row.hl_low);
-    setValue("hl_high", row.hl_high);
+    setValue(
+        "hl_price",
+        row.hl_price
+    );
 
-    setValue("lh_price", row.lh_price);
-    setValue("lh_low", row.lh_low);
-    setValue("lh_high", row.lh_high);
+    setValue(
+        "hl_low",
+        row.hl_low
+    );
 
-    setValue("ll_price", row.ll_price);
-    setValue("ll_low", row.ll_low);
-    setValue("ll_high", row.ll_high);
+    setValue(
+        "hl_high",
+        row.hl_high
+    );
+
+    setValue(
+        "lh_price",
+        row.lh_price
+    );
+
+    setValue(
+        "lh_low",
+        row.lh_low
+    );
+
+    setValue(
+        "lh_high",
+        row.lh_high
+    );
+
+    setValue(
+        "ll_price",
+        row.ll_price
+    );
+
+    setValue(
+        "ll_low",
+        row.ll_low
+    );
+
+    setValue(
+        "ll_high",
+        row.ll_high
+    );
 
     updateZoneStatus();
 }
 
-function setValue(id, value) {
 
-    const el = document.getElementById(id);
+/* =========================================================
+   SET INPUT
+========================================================= */
 
-    if (
+function setValue(id,value){
+
+    const element =
+        document.getElementById(id);
+
+    if(
         value !== null &&
         value !== undefined &&
         value !== ""
-    ) {
-        el.value = value;
+    ){
+        element.value = value;
     }
 }
 
+
 /* =========================================================
-   CLEAR FORM
+   CLEAR INPUTS
 ========================================================= */
 
-function clearZoneInputs() {
+function clearZoneInputs(){
 
     const ids = [
-        "hh_price","hh_low","hh_high",
-        "hl_price","hl_low","hl_high",
-        "lh_price","lh_low","lh_high",
-        "ll_price","ll_low","ll_high"
+
+        "hh_price",
+        "hh_low",
+        "hh_high",
+
+        "hl_price",
+        "hl_low",
+        "hl_high",
+
+        "lh_price",
+        "lh_low",
+        "lh_high",
+
+        "ll_price",
+        "ll_low",
+        "ll_high"
+
     ];
 
     ids.forEach(id => {
+
         document.getElementById(id).value = "";
+
     });
 }
 
-function clearForm() {
+
+function clearForm(){
 
     clearZoneInputs();
 
-    document.getElementById("zoneStatus").textContent =
+    const status =
+        document.getElementById(
+            "zoneStatus"
+        );
+
+    status.textContent =
         "Waiting for price...";
 
-    document.getElementById("zoneStatus").className =
+    status.className =
         "zone-status normal";
 }
+
+
+/* =========================================================
+   NUMBER VALUE
+========================================================= */
+
+function numberOrNull(id){
+
+    const value =
+        document.getElementById(id)
+        .value
+        .trim();
+
+    if(value === ""){
+        return null;
+    }
+
+    const number =
+        Number(value);
+
+    return Number.isFinite(number)
+        ? number
+        : null;
+}
+
 
 /* =========================================================
    SAVE COIN
 ========================================================= */
 
-async function saveCoin() {
+async function saveCoin(){
 
     const coin =
-        document.getElementById("coinSelect").value;
+        document.getElementById(
+            "coinSelect"
+        ).value;
 
     const payload = {
 
-        coin: coin,
+        coin:coin,
 
-        hh_price: numberOrNull("hh_price"),
-        hh_low: numberOrNull("hh_low"),
-        hh_high: numberOrNull("hh_high"),
+        hh_price:numberOrNull(
+            "hh_price"
+        ),
 
-        hl_price: numberOrNull("hl_price"),
-        hl_low: numberOrNull("hl_low"),
-        hl_high: numberOrNull("hl_high"),
+        hh_low:numberOrNull(
+            "hh_low"
+        ),
 
-        lh_price: numberOrNull("lh_price"),
-        lh_low: numberOrNull("lh_low"),
-        lh_high: numberOrNull("lh_high"),
+        hh_high:numberOrNull(
+            "hh_high"
+        ),
 
-        ll_price: numberOrNull("ll_price"),
-        ll_low: numberOrNull("ll_low"),
-        ll_high: numberOrNull("ll_high")
+        hl_price:numberOrNull(
+            "hl_price"
+        ),
+
+        hl_low:numberOrNull(
+            "hl_low"
+        ),
+
+        hl_high:numberOrNull(
+            "hl_high"
+        ),
+
+        lh_price:numberOrNull(
+            "lh_price"
+        ),
+
+        lh_low:numberOrNull(
+            "lh_low"
+        ),
+
+        lh_high:numberOrNull(
+            "lh_high"
+        ),
+
+        ll_price:numberOrNull(
+            "ll_price"
+        ),
+
+        ll_low:numberOrNull(
+            "ll_low"
+        ),
+
+        ll_high:numberOrNull(
+            "ll_high"
+        )
+
     };
 
-    try {
+
+    try{
 
         const existing =
-            savedCoins.find(item => item.coin === coin);
+            savedCoins.find(
+                item => item.coin === coin
+            );
 
-        if (existing) {
+
+        if(existing){
 
             await supabaseRequest(
                 "coin_zones?coin=eq." +
@@ -740,7 +937,8 @@ async function saveCoin() {
                 }
             );
 
-        } else {
+        }
+        else{
 
             await supabaseRequest(
                 "coin_zones",
@@ -749,47 +947,48 @@ async function saveCoin() {
                     body:JSON.stringify(payload)
                 }
             );
+
         }
 
-        alert("✅ " + coin + " saved successfully.");
 
         await loadCoins();
 
-    } catch (error) {
+        alert(
+            "✅ " +
+            coin +
+            " saved successfully."
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "SAVE ERROR:",
+            error
+        );
 
         alert(
             "❌ Save failed:\n" +
             error.message
         );
 
-        console.error(error);
     }
+
 }
 
-function numberOrNull(id) {
-
-    const value =
-        document.getElementById(id).value.trim();
-
-    if (value === "") return null;
-
-    const number = Number(value);
-
-    return Number.isFinite(number)
-        ? number
-        : null;
-}
 
 /* =========================================================
    MY COINS
 ========================================================= */
 
-function renderMyCoins() {
+function renderMyCoins(){
 
     const box =
-        document.getElementById("myCoins");
+        document.getElementById(
+            "myCoins"
+        );
 
-    if (!savedCoins.length) {
+    if(!savedCoins.length){
 
         box.textContent =
             "No saved coins yet.";
@@ -804,15 +1003,22 @@ function renderMyCoins() {
         const div =
             document.createElement("div");
 
-        div.className = "coin-item";
+        div.className =
+            "coin-item";
 
         const price =
             prices[row.coin];
 
         div.innerHTML = `
+
             <div class="coin-top">
+
                 <div>
-                    <div class="coin-name">${row.coin}</div>
+
+                    <div class="coin-name">
+                        ${row.coin}
+                    </div>
+
                     <div>
                         HH: ${display(row.hh_price)}
                         |
@@ -822,21 +1028,30 @@ function renderMyCoins() {
                         |
                         LL: ${display(row.ll_price)}
                     </div>
+
                 </div>
 
                 <div class="coin-price">
-                    ${price
+
+                    ${
+                        price
                         ? formatPrice(price)
-                        : "Loading..."}
+                        : "Loading..."
+                    }
+
                 </div>
+
             </div>
+
         `;
 
         box.appendChild(div);
+
     });
 }
 
-function display(value) {
+
+function display(value){
 
     return (
         value === null ||
@@ -847,44 +1062,76 @@ function display(value) {
     : value;
 }
 
+
 /* =========================================================
-   BINANCE PRICE SCANNER
+   BINANCE SCANNER
 ========================================================= */
 
-function startScanner() {
+function startScanner(){
 
-    document.getElementById("scannerStatus").textContent =
+    document.getElementById(
+        "scannerStatus"
+    ).textContent =
         "SCANNING";
 
     fetchPrices();
 
-    setInterval(fetchPrices, 3000);
+    setInterval(
+        fetchPrices,
+        3000
+    );
 }
 
-async function fetchPrices() {
 
-    try {
+/* =========================================================
+   FETCH ALL FUTURES PRICES
+========================================================= */
+
+async function fetchPrices(){
+
+    try{
 
         const response =
-            await fetch(BINANCE_URL);
-
-        if (!response.ok) {
-            throw new Error(
-                "Binance HTTP " + response.status
+            await fetch(
+                BINANCE_URL +
+                "?_=" +
+                Date.now()
             );
+
+        if(!response.ok){
+
+            throw new Error(
+                "Binance HTTP " +
+                response.status
+            );
+
         }
 
         const data =
             await response.json();
 
+
         data.forEach(item => {
 
-            if (COINS.includes(item.symbol)) {
+            if(
+                COINS.includes(
+                    item.symbol
+                )
+            ){
 
                 prices[item.symbol] =
                     Number(item.price);
+
             }
+
         });
+
+
+        document.getElementById(
+            "scannerStatus"
+        ).textContent =
+            "SCANNING";
+
 
         updateCurrentPrice();
 
@@ -892,34 +1139,44 @@ async function fetchPrices() {
 
         scanZones();
 
-    } catch (error) {
+    }
+    catch(error){
 
         console.error(
-            "Binance price error:",
+            "BINANCE ERROR:",
             error
         );
 
-        document.getElementById("scannerStatus").textContent =
+        document.getElementById(
+            "scannerStatus"
+        ).textContent =
             "ERROR";
+
     }
+
 }
+
 
 /* =========================================================
    CURRENT PRICE
 ========================================================= */
 
-function updateCurrentPrice() {
+function updateCurrentPrice(){
 
     const coin =
-        document.getElementById("coinSelect").value;
+        document.getElementById(
+            "coinSelect"
+        ).value;
 
     const price =
         prices[coin];
 
     const element =
-        document.getElementById("currentPrice");
+        document.getElementById(
+            "currentPrice"
+        );
 
-    if (!price) {
+    if(!price){
 
         element.textContent =
             "Loading...";
@@ -933,9 +1190,15 @@ function updateCurrentPrice() {
     updateZoneStatus();
 }
 
-function formatPrice(price) {
 
-    if (price >= 1000) {
+/* =========================================================
+   PRICE FORMAT
+========================================================= */
+
+function formatPrice(price){
+
+    if(price >= 1000){
+
         return price.toLocaleString(
             undefined,
             {
@@ -943,9 +1206,11 @@ function formatPrice(price) {
                 maximumFractionDigits:2
             }
         );
+
     }
 
-    if (price >= 1) {
+    if(price >= 1){
+
         return price.toLocaleString(
             undefined,
             {
@@ -953,6 +1218,7 @@ function formatPrice(price) {
                 maximumFractionDigits:4
             }
         );
+
     }
 
     return price.toLocaleString(
@@ -962,24 +1228,81 @@ function formatPrice(price) {
             maximumFractionDigits:8
         }
     );
+
 }
 
+
 /* =========================================================
-   ZONE STATUS
+   GET CURRENT ZONES
 ========================================================= */
 
-function updateZoneStatus() {
+function getCurrentZones(){
+
+    const zones = [
+
+        {
+            name:"HH",
+            price:numberOrNull("hh_price"),
+            low:numberOrNull("hh_low"),
+            high:numberOrNull("hh_high")
+        },
+
+        {
+            name:"HL",
+            price:numberOrNull("hl_price"),
+            low:numberOrNull("hl_low"),
+            high:numberOrNull("hl_high")
+        },
+
+        {
+            name:"LH",
+            price:numberOrNull("lh_price"),
+            low:numberOrNull("lh_low"),
+            high:numberOrNull("lh_high")
+        },
+
+        {
+            name:"LL",
+            price:numberOrNull("ll_price"),
+            low:numberOrNull("ll_low"),
+            high:numberOrNull("ll_high")
+        }
+
+    ];
+
+    return zones.filter(zone => {
+
+        return (
+            zone.low !== null &&
+            zone.high !== null &&
+            zone.low <= zone.high
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   UPDATE ZONE STATUS
+========================================================= */
+
+function updateZoneStatus(){
 
     const coin =
-        document.getElementById("coinSelect").value;
+        document.getElementById(
+            "coinSelect"
+        ).value;
 
     const price =
         prices[coin];
 
     const status =
-        document.getElementById("zoneStatus");
+        document.getElementById(
+            "zoneStatus"
+        );
 
-    if (!price) {
+    if(!price){
 
         status.textContent =
             "Waiting for Binance price...";
@@ -990,22 +1313,29 @@ function updateZoneStatus() {
         return;
     }
 
-    const zones = getCurrentZones();
+    const zones =
+        getCurrentZones();
 
     let found = null;
 
-    for (const zone of zones) {
+    for(
+        const zone of zones
+    ){
 
-        if (
+        if(
             price >= zone.low &&
             price <= zone.high
-        ) {
+        ){
+
             found = zone;
             break;
+
         }
+
     }
 
-    if (found) {
+
+    if(found){
 
         status.textContent =
             "🎯 PRICE INSIDE " +
@@ -1015,15 +1345,608 @@ function updateZoneStatus() {
         status.className =
             "zone-status inside";
 
-    } else {
+    }
+    else{
 
         status.textContent =
             "Price outside saved zones";
 
         status.className =
             "zone-status normal";
+
     }
+
 }
 
+
 /* =========================================================
-   GET Z
+   SCAN ALL SAVED COINS
+========================================================= */
+
+function scanZones(){
+
+    savedCoins.forEach(row => {
+
+        const price =
+            prices[row.coin];
+
+        if(!price) return;
+
+
+        const zones = [
+
+            {
+                name:"HH",
+                low:row.hh_low,
+                high:row.hh_high
+            },
+
+            {
+                name:"HL",
+                low:row.hl_low,
+                high:row.hl_high
+            },
+
+            {
+                name:"LH",
+                low:row.lh_low,
+                high:row.lh_high
+            },
+
+            {
+                name:"LL",
+                low:row.ll_low,
+                high:row.ll_high
+            }
+
+        ];
+
+
+        zones.forEach(zone => {
+
+            if(
+                zone.low === null ||
+                zone.high === null ||
+                zone.low === undefined ||
+                zone.high === undefined
+            ){
+                return;
+            }
+
+
+            const low =
+                Number(zone.low);
+
+            const high =
+                Number(zone.high);
+
+
+            if(
+                !Number.isFinite(low) ||
+                !Number.isFinite(high) ||
+                low > high
+            ){
+                return;
+            }
+
+
+            const inside =
+                price >= low &&
+                price <= high;
+
+
+            const key =
+                row.coin +
+                "_" +
+                zone.name;
+
+
+            if(inside){
+
+                if(
+                    !alertedZones[key]
+                ){
+
+                    alertedZones[key] = true;
+
+                    triggerAlert(
+                        row.coin,
+                        zone.name,
+                        price
+                    );
+
+                }
+
+            }
+            else{
+
+                alertedZones[key] = false;
+
+            }
+
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   ALERT
+========================================================= */
+
+function triggerAlert(
+    coin,
+    zone,
+    price
+){
+
+    const text =
+        coin +
+        " entered " +
+        zone +
+        " zone";
+
+
+    lastAlertText =
+        coin +
+        " " +
+        zone;
+
+
+    document.getElementById(
+        "lastAlert"
+    ).textContent =
+        lastAlertText;
+
+
+    addAlertHistory(
+        coin,
+        zone,
+        price
+    );
+
+
+    if(
+        document.getElementById(
+            "soundEnabled"
+        ).checked
+    ){
+
+        playAlarm();
+
+    }
+
+
+    if(
+        document.getElementById(
+            "vibrationEnabled"
+        ).checked
+    ){
+
+        vibrate();
+
+    }
+
+
+    if(
+        document.getElementById(
+            "notificationEnabled"
+        ).checked
+    ){
+
+        sendNotification(
+            text,
+            price
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   TEST ALERT
+========================================================= */
+
+async function testAlert(){
+
+    if(
+        document.getElementById(
+            "notificationEnabled"
+        ).checked
+    ){
+
+        await requestNotificationPermission();
+
+    }
+
+
+    if(
+        document.getElementById(
+            "soundEnabled"
+        ).checked
+    ){
+
+        playAlarm();
+
+    }
+
+
+    if(
+        document.getElementById(
+            "vibrationEnabled"
+        ).checked
+    ){
+
+        vibrate();
+
+    }
+
+
+    if(
+        document.getElementById(
+            "notificationEnabled"
+        ).checked
+    ){
+
+        sendNotification(
+            "Futures Alert App",
+            "Test alert is working"
+        );
+
+    }
+
+
+    addAlertHistory(
+        "TEST",
+        "ALERT",
+        "-"
+    );
+
+}
+
+
+/* =========================================================
+   SOUND
+========================================================= */
+
+function playAlarm(){
+
+    try{
+
+        if(!audioContext){
+
+            audioContext =
+                new (
+                    window.AudioContext ||
+                    window.webkitAudioContext
+                )();
+
+        }
+
+
+        if(
+            audioContext.state ===
+            "suspended"
+        ){
+
+            audioContext.resume();
+
+        }
+
+
+        const now =
+            audioContext.currentTime;
+
+
+        for(
+            let i = 0;
+            i < 4;
+            i++
+        ){
+
+            const oscillator =
+                audioContext.createOscillator();
+
+            const gain =
+                audioContext.createGain();
+
+
+            oscillator.type =
+                "square";
+
+            oscillator.frequency.value =
+                i % 2 === 0
+                ? 880
+                : 660;
+
+
+            gain.gain.setValueAtTime(
+                0.0001,
+                now + i * 0.45
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.35,
+                now + i * 0.45 + 0.03
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.0001,
+                now + i * 0.45 + 0.35
+            );
+
+
+            oscillator.connect(gain);
+
+            gain.connect(
+                audioContext.destination
+            );
+
+
+            oscillator.start(
+                now + i * 0.45
+            );
+
+            oscillator.stop(
+                now + i * 0.45 + 0.36
+            );
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Sound error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   VIBRATION
+========================================================= */
+
+function vibrate(){
+
+    if(
+        "vibrate" in navigator
+    ){
+
+        navigator.vibrate([
+            500,
+            200,
+            500,
+            200,
+            700
+        ]);
+
+    }
+
+}
+
+
+/* =========================================================
+   NOTIFICATION PERMISSION
+========================================================= */
+
+async function requestNotificationPermission(){
+
+    if(
+        !("Notification" in window)
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        Notification.permission ===
+        "default"
+    ){
+
+        try{
+
+            await Notification.requestPermission();
+
+        }
+        catch(error){
+
+            console.error(
+                "Notification permission error:",
+                error
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   SEND NOTIFICATION
+========================================================= */
+
+function sendNotification(
+    title,
+    price
+){
+
+    if(
+        !("Notification" in window)
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        Notification.permission !==
+        "granted"
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        const notification =
+            new Notification(
+                title,
+                {
+                    body:
+                        "Price: " +
+                        (
+                            typeof price ===
+                            "number"
+                            ? formatPrice(price)
+                            : price
+                        ),
+
+                    tag:
+                        "futures-alert-" +
+                        Date.now()
+                }
+            );
+
+
+        notification.onclick =
+            function(){
+
+                window.focus();
+
+                notification.close();
+
+            };
+
+    }
+    catch(error){
+
+        console.error(
+            "Notification error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ALERT HISTORY
+========================================================= */
+
+function addAlertHistory(
+    coin,
+    zone,
+    price
+){
+
+    const item = {
+
+        coin:coin,
+
+        zone:zone,
+
+        price:price,
+
+        time:
+            new Date().toLocaleString()
+
+    };
+
+
+    alertHistory.unshift(item);
+
+
+    if(
+        alertHistory.length > 30
+    ){
+
+        alertHistory =
+            alertHistory.slice(0,30);
+
+    }
+
+
+    renderAlertHistory();
+
+}
+
+
+function renderAlertHistory(){
+
+    const box =
+        document.getElementById(
+            "alertHistory"
+        );
+
+
+    if(
+        !alertHistory.length
+    ){
+
+        box.textContent =
+            "No alerts yet.";
+
+        return;
+
+    }
+
+
+    box.innerHTML = "";
+
+
+    alertHistory.forEach(item => {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+        div.className =
+            "alert-item";
+
+
+        div.innerHTML = `
+
+            <strong>
+                ${item.coin}
+            </strong>
+
+            — ${item.zone}
+
+            <br>
+
+            Price:
+            ${item.price}
+
+            <br>
+
+            <small>
+                ${item.time}
+            </small>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
